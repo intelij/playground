@@ -43,6 +43,20 @@ class PaymentGateway implements PaymentGatewayContract
         ];
     }
 
+    public function getSessionKey() {
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->post('https://connect.stripe.com/oauth/deauthorize', [
+            'auth' => ['XXXXX', ''],
+            'form_params' => [
+                'client_id' => 'ca_8e8Y5aZOmUEaM47nBRYvL6NirsnkEKPD',
+                'stripe_user_id' => 'acct_Ng24IGpK2whxwj',
+            ]]);
+
+        return $response['merchantSessionKey'];
+    }
+
     public function http() {
 
         $client = new Client();
